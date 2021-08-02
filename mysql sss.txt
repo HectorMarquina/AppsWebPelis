@@ -1,0 +1,83 @@
+
+CREATE TABLE pelicula(
+    id SMALLINT  PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL, 
+    description VARCHAR(255) NOT NULL,  
+    estreno DATETIME NOT NULL,
+    recaudacion DOUBLE  NOT NULL,
+    status TINYINT  NOT NULL
+);
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE sp_findAll ()  BEGIN
+	SELECT * FROM pelicula;
+END$$
+//
+
+DROP PROCEDURE IF EXISTS sp_create;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create
+(IN v_namwe VARCHAR(4000),
+IN v_description VARCHAR(4000),
+IN v_estreno DATETIME,
+IN v_recaudacion DOUBLE)
+BEGIN
+DECLARE v_id SMALLINT  DEFAULT  0;
+DECLARE v_estado SMALLINT  DEFAULT  1;
+ 
+    -- SQLINES LICENSE FOR EVALUATION USE ONLY
+    SELECT  MAX(ID) INTO v_id FROM pelicula;
+    IF v_id IS NULL THEN SET v_id = 0; END IF;
+    SET v_id = v_id + 1;
+
+    INSERT INTO pelicula (id, name, descriprion, estreno, recaudacion, status)
+    VALUES (v_id, v_nombre, v_description, vestreno, v_recaudacion, v_status);
+
+END;
+//
+
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS sp_update;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update
+(IN v_id DOUBLE,
+IN v_nombre VARCHAR(4000),
+IN v_descripcion VARCHAR(4000),
+IN v_fecha_estreno DATETIME,
+IN v_recaudacion DOUBLE)
+BEGIN
+    UPDATE pelicula
+    SET   nombre = v_name, description = v_descritcion, estreno = v_estreno, recaudacion = v_recaudacion 
+    WHERE v_id = id;
+
+END;
+//
+
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS sp_delete2;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete2
+(IN v_id DOUBLE)
+BEGIN
+    UPDATE pelicula
+    SET status = 0
+    WHERE v_id = id;
+END;
+//
+
+DELIMITER ;
