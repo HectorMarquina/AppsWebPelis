@@ -58,7 +58,7 @@ IN v_fecha_estreno DATETIME,
 IN v_recaudacion DOUBLE)
 BEGIN
     UPDATE pelicula
-    SET   nombre = v_name, description = v_descritcion, estreno = v_estreno, recaudacion = v_recaudacion 
+    SET   name = v_name, description = v_descritcion, estreno = v_estreno, recaudacion = v_recaudacion 
     WHERE v_id = id;
 
 END;
